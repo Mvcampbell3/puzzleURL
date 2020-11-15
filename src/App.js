@@ -7,6 +7,9 @@ import Landing from './components/pages/Landing';
 import Wrong from './components/pages/Wrong';
 import Correct from './components/pages/Correct';
 
+// Component Imports
+import BreadCrumbs from './components/common/BreadCrumbs'
+
 function App() {
   const [currentStep, setCurrentStep] = useState(0);
   const [nextRoute, setNextRoute] = useState("");
@@ -45,10 +48,12 @@ function App() {
   return (
     <div className="App">
       <Router>
+        <BreadCrumbs {...newProps} />
         <Switch>
           <Route exact path="/" render={() => <Landing {...newProps} />} />
           <Route exact path="/baseball" render={() => <Correct {...newProps} />} />
           <Route exact path="/test" render={() => <Correct {...newProps} />} />
+          <Route exact path="/golf" render={() => <Correct {...newProps} />} />
           <Route path="*" render={() => <Wrong {...newProps} />} />
         </Switch>
       </Router>
