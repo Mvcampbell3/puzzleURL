@@ -1,0 +1,43 @@
+.App {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 2em;
+}
+
+.input {
+  padding: 1em 0.5em;
+  font-size: 20px;
+  width: 350px;
+}
+
+.input-label {
+  font-size: 24px;
+  font-weight: bolder;
+  display: block;
+}
+
+.btn {
+  padding: 0.5em 1.5em;
+  background-color: white;
+  border: 0;
+  color: #333;
+  display: block;
+  font-size: 20px;
+  border-radius: 0.25em;
+}
+
+.btn:focus {
+  outline: 0;
+}
+
+.btn:active {
+  transform: scale(0.95);
+}
+
+.btn-submit {
+  background-color: green;
+  color: white;
+}
