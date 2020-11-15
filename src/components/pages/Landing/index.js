@@ -3,33 +3,29 @@ import './landing.css';
 import { Redirect } from 'react-router-dom';
 
 const Landing = (props) => {
-  const [nextRoute, setNextRoute] = useState("");
-  const [sendRedirect, setSendRedirect] = useState(false);
-  const [subSent, setSubSent] = useState(false);
 
-  useEffect(() => {
-    if (subSent) {
-      setNextRoute(prevValue => {
-        return prevValue.split(" ").join("");
-      })
-    }
-  }, [subSent])
+  const { nextRoute, setNextRoute, subSent, setSubSent } = props;
 
-  useEffect(() => {
-    if (subSent && !nextRoute.includes(" ")) {
-      console.log('this is called')
-      setSendRedirect(true)
-    }
-  }, [subSent, nextRoute])
+  const [useRedirect, setUseRedirect] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSubSent(true);
+    setSubSent(true)
   }
+
+  useEffect(() => {
+    setSubSent(false)
+  }, [setSubSent])
+
+  useEffect(() => {
+    if (subSent && !nextRoute.includes(" ")) {
+      setUseRedirect(true)
+    }
+  }, [subSent, nextRoute])
 
   return (
     <div className="landing-container">
-      {sendRedirect && <Redirect to={`/${nextRoute}`} />}
+      {useRedirect && <Redirect to={`/${nextRoute}`} />}
       <form onSubmit={e => handleSubmit(e)}>
         <h1>This is the landing container</h1>
         <div className="input-group">
