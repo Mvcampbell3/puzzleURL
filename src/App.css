@@ -47,12 +47,16 @@
 }
 
 .link-holder li {
-  padding: 0px 5px;
+  padding: 0px 0px 0px 10px;
+}
+
+.link-holder li:nth-child(1) {
+  padding: 0;
 }
 
 .link-holder li::after {
   content: '>';
-  padding-left: 5px;
+  padding-left: 10px;
   color: black;
 }
 
