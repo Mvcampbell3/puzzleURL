@@ -6,8 +6,8 @@ const BreadCrumbs = (props) => {
   return (
     <div className="breadcrumbs-container">
       <ul className="link-holder">
-        {correctRoutes.sort((a, b) => a.step - b.step).map(route =>
-          <li key={route.step}>
+        {correctRoutes.sort((a, b) => a.place - b.place).map(route =>
+          <li key={route.place}>
             <Link to={`/${route.route}`}>{route.route}</Link>
           </li>
         )}

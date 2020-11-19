@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import './landing.css';
 import { Redirect } from 'react-router-dom';
+import storage from '../../../core/storage';
 
 const Landing = (props) => {
 
   const { nextRoute, setNextRoute, subSent, setSubSent } = props;
-
+  const { clearLocalStorage } = storage;
   const [useRedirect, setUseRedirect] = useState(false);
 
   const handleSubmit = (e) => {
@@ -41,6 +42,7 @@ const Landing = (props) => {
         </div>
         <div className="input-group">
           <button className="btn btn-submit" onClick={(e) => handleSubmit(e)}>Go!</button>
+          <button className="btn btn-clear" onClick={e => clearLocalStorage()}>Clear History</button>
         </div>
       </form>
     </div>

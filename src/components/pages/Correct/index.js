@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './correct.css';
 import destinations from '../../../core/constants';
+import storage from '../../../core/storage';
 
 const Correct = (props) => {
   const {
@@ -10,24 +11,20 @@ const Correct = (props) => {
     setCorrectRoutes
   } = props;
 
+  const { setLocalStorage } = storage;
+
   useEffect(() => {
     setSubSent(false);
   }, [setSubSent])
 
   useEffect(() => {
     if (destinations[nextRoute.toUpperCase()] !== undefined) {
+      setLocalStorage({ route: nextRoute.toUpperCase(), place: destinations[nextRoute.toUpperCase()] })
       setCorrectRoutes(prevVal => {
-        const hasStep = prevVal.find(place => place.step === destinations[nextRoute.toUpperCase()]);
-        if (!hasStep) {
-          console.log('new step added to corrects')
-          const newCorrects = [...prevVal, { route: nextRoute, step: destinations[nextRoute.toUpperCase()] }];
-          return newCorrects;
-        }
-        console.log('has already been to this place')
-        return prevVal;
+        return [...prevVal, { route: nextRoute, place: destinations[nextRoute.toUpperCase()] }]
       })
     }
-  }, [nextRoute, destinations, setCorrectRoutes])
+  }, [nextRoute, setCorrectRoutes, setLocalStorage])
 
   return (
     <div className="correct-container">

@@ -1,6 +1,8 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import storage from './core/storage'
+import destinations from './core/constants';
 
 // Page Imports
 import Landing from './components/pages/Landing';
@@ -16,6 +18,8 @@ function App() {
   const [correctRoutes, setCorrectRoutes] = useState([]);
   const [subSent, setSubSent] = useState(false);
 
+  const { getLocalStorage, setLocalStorage, clearLocalStorage } = storage;
+
   useEffect(() => {
     if (subSent) {
       setNextRoute(prevValue => {
@@ -23,6 +27,20 @@ function App() {
       })
     }
   }, [subSent])
+
+  useEffect(() => {
+    const currentStorage = getLocalStorage();
+    console.log(currentStorage)
+    if (currentStorage) {
+      let tempArr = [];
+      for (let route in currentStorage) {
+        if (destinations[route] === currentStorage[route]) {
+          tempArr.push({ route: route.toLowerCase(), place: currentStorage[route] })
+        }
+      }
+      setCorrectRoutes(tempArr)
+    }
+  }, [])
 
   const newProps = useMemo(() => {
     return {
@@ -54,6 +72,9 @@ function App() {
           <Route exact path="/baseball" render={() => <Correct {...newProps} />} />
           <Route exact path="/test" render={() => <Correct {...newProps} />} />
           <Route exact path="/golf" render={() => <Correct {...newProps} />} />
+          <Route exact path="/jackson" render={() => <Correct {...newProps} />} />
+          <Route exact path="/marcus" render={() => <Correct {...newProps} />} />
+          <Route exact path="/bisping" render={() => <Correct {...newProps} />} />
           <Route path="*" render={() => <Wrong {...newProps} />} />
         </Switch>
       </Router>
