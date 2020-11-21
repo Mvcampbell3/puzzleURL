@@ -5,9 +5,9 @@ import storage from './core/storage'
 import destinations from './core/constants';
 
 // Page Imports
-import Landing from './components/pages/Landing';
-import Wrong from './components/pages/Wrong';
-import Correct from './components/pages/Correct';
+import { Landing } from './components/pages/Landing';
+import { Wrong } from './components/pages/Wrong';
+import { Correct } from './components/pages/Correct';
 
 // Component Imports
 import BreadCrumbs from './components/common/BreadCrumbs'
@@ -68,7 +68,7 @@ function App() {
       <Router>
         <BreadCrumbs {...newProps} />
         <Switch>
-          <Route exact path="/" render={() => <Landing {...newProps} />} />
+          <Route exact path="/"><Landing {...newProps} /></Route>
           <Route exact path="/baseball" render={() => <Correct {...newProps} />} />
           <Route exact path="/test" render={() => <Correct {...newProps} />} />
           <Route exact path="/golf" render={() => <Correct {...newProps} />} />
