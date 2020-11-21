@@ -1,0 +1,4 @@
+.puzzle-container {
+    width: calc(100vw - 300px);
+    min-height: 70vh;
+}

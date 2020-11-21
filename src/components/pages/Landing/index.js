@@ -3,8 +3,12 @@ import './landing.css';
 import PropTypes from 'prop-types';
 import BreadCrumbs from '../../common/BreadCrumbs';
 import LandingForm from './LandingForm';
-import Space from '../../puzzles/Space';
-import Baseball from '../../puzzles/Baseball';
+
+import answers from '../../../core/constants';
+
+// Answer Pages Imports
+import Hint from '../../puzzles/Hint';
+
 
 const Landing = (props) => {
 
@@ -17,26 +21,6 @@ const Landing = (props) => {
     setGuess
   } = props;
 
-  const setDisplay = useCallback((inProps) => {
-    switch (step) {
-      case 1:
-        return <Baseball {...inProps} />
-      case 0:
-      default:
-        return <Space {...inProps} />
-    }
-  }, [step])
-
-  useEffect(() => {
-    const acceptedAnswers = ['space', 'baseball'];
-    if (acceptedAnswers.indexOf(guess) !== -1) {
-      setStep(acceptedAnswers.indexOf(guess) + 1)
-      setGuess('');
-    }
-  }, [guess])
-
-
-
   const handleSubmit = (e) => {
     e.preventDefault();
   }
@@ -46,7 +30,7 @@ const Landing = (props) => {
       <BreadCrumbs {...props} />
       <div className="landing-page">
         <LandingForm {...props} />
-        {setDisplay(props)}
+        <Hint {...props} />
       </div>
     </div>
   )
