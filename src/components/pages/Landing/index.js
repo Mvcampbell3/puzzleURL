@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import './landing.css';
 import PropTypes from 'prop-types';
 import BreadCrumbs from '../../common/BreadCrumbs';
@@ -24,9 +24,16 @@ const Landing = (props) => {
       case 0:
       default:
         return <Space {...inProps} />
-
     }
   }, [step])
+
+  useEffect(() => {
+    const acceptedAnswers = ['space', 'baseball'];
+    if (acceptedAnswers.indexOf(guess) !== -1) {
+      setStep(acceptedAnswers.indexOf(guess) + 1)
+      setGuess('');
+    }
+  }, [guess])
 
 
 
