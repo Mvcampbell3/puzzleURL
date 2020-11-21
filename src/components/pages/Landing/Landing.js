@@ -6,13 +6,18 @@ import PropTypes from 'prop-types';
 
 const Landing = (props) => {
 
-  const { nextRoute, setNextRoute, subSent, setSubSent } = props;
+  const { nextRoute, setNextRoute, subSent, setSubSent, clearStorageAndLinks } = props;
   const { clearLocalStorage } = storage;
   const [useRedirect, setUseRedirect] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setSubSent(true)
+  }
+
+  const handleClear = (e) => {
+    e.preventDefault();
+    clearStorageAndLinks()
   }
 
   useEffect(() => {
@@ -43,7 +48,7 @@ const Landing = (props) => {
         </div>
         <div className="input-group">
           <button className="btn btn-submit" onClick={(e) => handleSubmit(e)}>Go!</button>
-          <button className="btn btn-clear" onClick={e => clearLocalStorage()}>Clear History</button>
+          <button className="btn btn-clear" onClick={(e) => handleClear(e)}>Clear History</button>
         </div>
       </form>
     </div>

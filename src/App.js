@@ -18,7 +18,7 @@ function App() {
   const [correctRoutes, setCorrectRoutes] = useState([]);
   const [subSent, setSubSent] = useState(false);
 
-  const { getLocalStorage, setLocalStorage, clearLocalStorage } = storage;
+  const { getLocalStorage, clearLocalStorage } = storage;
 
   useEffect(() => {
     if (subSent) {
@@ -42,6 +42,11 @@ function App() {
     }
   }, [])
 
+  const clearStorageAndLinks = () => {
+    clearLocalStorage();
+    setCorrectRoutes([]);
+  }
+
   const newProps = useMemo(() => {
     return {
       currentStep,
@@ -51,7 +56,8 @@ function App() {
       subSent,
       setSubSent,
       correctRoutes,
-      setCorrectRoutes
+      setCorrectRoutes,
+      clearStorageAndLinks
     }
   }, [currentStep,
     setCurrentStep,
@@ -60,7 +66,8 @@ function App() {
     subSent,
     setSubSent,
     correctRoutes,
-    setCorrectRoutes
+    setCorrectRoutes,
+    clearStorageAndLinks
   ]);
 
   return (
